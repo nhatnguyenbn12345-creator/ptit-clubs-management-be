@@ -1,11 +1,11 @@
 from rest_framework import serializers
 from .models import (
-    Club, ClubCategory, ClubMember, Event, 
-    EventProposal, FundingRequest, ClubFinance, 
-    Attendance, Report
+    Attendance, Club, Clubfinance, ClubCategory, 
+    ClubMember, Event, Eventproposal, Fundingrequest, 
+    Report, Role, Student, Systemlog, Transactiontype, User
 )
 
-# Serializer cho Câu lạc bộ & Danh mục
+# --- NHÓM 1: CÂU LẠC BỘ ---
 class ClubCategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = ClubCategory
@@ -16,7 +16,12 @@ class ClubSerializer(serializers.ModelSerializer):
         model = Club
         fields = '__all__'
 
-# Serializer cho Thành viên & Điểm danh
+# --- NHÓM 2: THÀNH VIÊN & SINH VIÊN ---
+class StudentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Student
+        fields = '__all__'
+
 class ClubMemberSerializer(serializers.ModelSerializer):
     class Meta:
         model = ClubMember
@@ -27,10 +32,10 @@ class AttendanceSerializer(serializers.ModelSerializer):
         model = Attendance
         fields = '__all__'
 
-# Serializer cho Sự kiện & Tài chính
-class EventProposalSerializer(serializers.ModelSerializer):
+# --- NHÓM 3: SỰ KIỆN & ĐỀ XUẤT ---
+class EventproposalSerializer(serializers.ModelSerializer):
     class Meta:
-        model = EventProposal
+        model = Eventproposal
         fields = '__all__'
 
 class EventSerializer(serializers.ModelSerializer):
@@ -38,14 +43,36 @@ class EventSerializer(serializers.ModelSerializer):
         model = Event
         fields = '__all__'
 
-class FundingRequestSerializer(serializers.ModelSerializer):
+# --- NHÓM 4: TÀI CHÍNH ---
+class TransactiontypeSerializer(serializers.ModelSerializer):
     class Meta:
-        model = FundingRequest
+        model = Transactiontype
         fields = '__all__'
 
-class ClubFinanceSerializer(serializers.ModelSerializer):
+class ClubfinanceSerializer(serializers.ModelSerializer):
     class Meta:
-        model = ClubFinance
+        model = Clubfinance
+        fields = '__all__'
+
+class FundingrequestSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Fundingrequest
+        fields = '__all__'
+
+# --- NHÓM 5: HỆ THỐNG & NGƯỜI DÙNG ---
+class RoleSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Role
+        fields = '__all__'
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['user_id', 'username', 'status', 'role'] # Giấu password cho an toàn
+
+class SystemlogSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Systemlog
         fields = '__all__'
 
 class ReportSerializer(serializers.ModelSerializer):
