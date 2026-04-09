@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from rest_framework.validators import UniqueValidator
 from .models import (
     Attendance, Club, Clubfinance, ClubCategory, 
     ClubMember, Event, Eventproposal, Fundingrequest, 
@@ -7,6 +8,9 @@ from .models import (
 
 # --- NHÓM 1: CÂU LẠC BỘ ---
 class ClubCategorySerializer(serializers.ModelSerializer):
+    category_name = serializers.CharField(
+        validators=[UniqueValidator(queryset=ClubCategory.objects.all(), message="Tên danh mục này đã tồn tại!")]
+    )
     class Meta:
         model = ClubCategory
         fields = '__all__'
